@@ -1,2 +1,1 @@
-# imagelytics
-Standalone app to classify images, visualize heatmaps and generate report
+# Imagelytics: A standalone desktop application for image classification with visualization and reporting
