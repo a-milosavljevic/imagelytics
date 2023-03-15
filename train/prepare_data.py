@@ -20,8 +20,7 @@ def square_resize_image(img_input):
         else:
             left = (h - w) // 2
             right = (h - w) - left
-        #mean_color = tuple(np.average(img_input, axis=(0, 1)))
-        img_out = cv.copyMakeBorder(img_out, top, bottom, left, right, cv.BORDER_CONSTANT, value=(0, 0, 0)) #mean_color
+        img_out = cv.copyMakeBorder(img_out, top, bottom, left, right, cv.BORDER_CONSTANT, value=(0, 0, 0))
     img_out = cv.resize(img_out, (image_size, image_size), interpolation=cv.INTER_AREA)
     return img_out
 
@@ -35,13 +34,14 @@ for cls in classes:
     train_images = []
     val_images = []
     test_images = []
-    for fname in files:
-        if len(fname) < 14 or len(fname) > 15:
-            print('BAD FILENAME:', fname)
-        if fname[-4:].lower() == '.jpg' or fname[-4:].lower() == '.tif':
-            #print(fname, fname[6:9])
-            unit = int(fname[6:9])
-            fold = unit % len(subset_distribution)
+    for i in range(len(files)):
+        fname = files[i]
+        ext = ''
+        idx = fname.rfind('.')
+        if idx > 0:
+            ext = fname[idx+1:].lower()
+        if ext in ['jpg', 'png', 'jpeg', 'tif', 'tiff']:
+            fold = i % len(subset_distribution)
             if subset_distribution[fold].upper() == 'T':
                 train_images.append(fname)
             elif subset_distribution[fold].upper() == 'V':
@@ -78,3 +78,4 @@ for cls in classes:
         img = cv.imread(fpath)
         img = square_resize_image(img)
         cv.imwrite(os.path.join(test_cls_folder, fname[:-4] + '.jpg'), img)
+
