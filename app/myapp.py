@@ -287,15 +287,14 @@ class MyApp(QObject):
                             batch_idx = np.flip(batch_idx, axis=-1)
 
                             # Fill image info
+
                             idx = batch_idx[0, :5]
                             cls = [classes[k] for k in idx]
                             prob = batch_y[0, idx]
                             top_class = idx[0]
-                            top5_classes = [(cls[0], float(prob[0])),
-                                            (cls[1], float(prob[1])),
-                                            (cls[2], float(prob[2])),
-                                            (cls[3], float(prob[3])),
-                                            (cls[4], float(prob[4]))]
+                            top5_classes = []
+                            for ci in range(len(cls)):
+                                top5_classes.append((cls[ci], float(prob[ci])))
                             #print(top5_classes)
 
                             # Visualize heatmaps
@@ -347,7 +346,7 @@ class MyApp(QObject):
                             html_file.write('	<div class="col-sm-6">\n')
                             html_file.write('		<div class="alert alert-info"><strong>{}</strong></div>\n'.format(image_name))
                             html_file.write('		<div class="well">\n')
-                            for ci in range(5):
+                            for ci in range(len(top5_classes)):
                                 cls = top5_classes[ci][0]
                                 prob = '{:.2f}'.format(round(100 * top5_classes[ci][1], 2))
                                 html_file.write('			<div>{} <span class="pull-right">{}%</span></div>\n'.format(cls, prob))

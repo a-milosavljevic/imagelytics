@@ -21,3 +21,4 @@ Imagelytics installation package for Windows is available for download in the re
 ![imagelytics4.png](docs/images/imagelytics4.png)
 6) Once the process finishes you may open the report by clicking the <code>Open report</code> button. The <code>Edit project</code> button will bring back the edit mode.
 ![imagelytics5.png](docs/images/imagelytics5.png)
+![imagelytics6.png](docs/images/imagelytics6.png)
