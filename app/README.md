@@ -2,7 +2,7 @@
 
 ## Prerequisites
 1) Setup virtual environment for the project. 
-2) Install project requirements listed in the <code>requirements.txt</code> file.
+2) Install project requirements listed in the <code>[requirements.txt](requirements.txt)</code> file.
 3) To be able to build an installation package please install InnoSetup 6.2.1 or newer:</br>
 https://jrsoftware.org/isinfo.php
 
