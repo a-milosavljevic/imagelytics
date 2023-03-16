@@ -1,0 +1,26 @@
+{
+  "classes": [
+    "Chironomus_nudiventris",
+    "Chironomus_riparius",
+    "Microtendipes_pedellus",
+    "Orthocladius_sp",
+    "Polypedilum_convictum",
+    "Polypedilum_laetum",
+    "Polypedilum_nubeculosum",
+    "Polypedilum_scalaenum",
+    "Tvetenia_calvescens",
+    "Tvetenia_discoloripes"
+  ],
+  "image_size": 512,
+  "stretch": false,
+  "encoder": "EfficientNetB2",
+  "last_conv_layer": "top_activation",
+  "dropout_rate": 0,
+  "hidden_neurons": 0,
+  "optimizer": "Adam",
+  "init_learning_rate": 0.001,
+  "batch_size": 16,
+  "data_augmentation": true,
+  "cosine_annealing": false,
+  "monitor_loss": true
+}

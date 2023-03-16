@@ -1,0 +1,10 @@
+# Python
+.idea/
+__pycache__/
+venv
+
+# app
+app/build/*
+app/dist/*
+
+# train

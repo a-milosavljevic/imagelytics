@@ -25,6 +25,8 @@ def square_resize_image(img_input):
     return img_out
 
 
+copy_to_test_orig = False
+
 classes = [fname for fname in os.listdir(original_data_folder)]
 print(len(classes), classes)
 
@@ -61,6 +63,14 @@ for cls in classes:
     if not os.path.exists(test_cls_folder):
         os.makedirs(test_cls_folder)
 
+    if copy_to_test_orig:
+        test_orig_folder = os.path.join(data_folder, 'test_original')
+        if not os.path.exists(test_orig_folder):
+            os.makedirs(test_orig_folder)
+        test_orig_cls_folder = os.path.join(test_orig_folder, cls)
+        if not os.path.exists(test_orig_cls_folder):
+            os.makedirs(test_orig_cls_folder)
+
     for fname in train_images:
         fpath = os.path.join(cls_folder, fname)
         img = cv.imread(fpath)
@@ -78,4 +88,8 @@ for cls in classes:
         img = cv.imread(fpath)
         img = square_resize_image(img)
         cv.imwrite(os.path.join(test_cls_folder, fname[:-4] + '.jpg'), img)
+
+        if copy_to_test_orig:
+            fpath_test = os.path.join(test_orig_cls_folder, fname)
+            shutil.copyfile(fpath, fpath_test)
 
