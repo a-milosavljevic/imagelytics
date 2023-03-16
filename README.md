@@ -10,7 +10,8 @@ The repository consists of three folders:
    - <code>[docs/images](docs/images)</code> - images of the UI for this document.
 
 ## Download and install Imagelytics
-Imagelytics installation package for Windows is available for download in the repository release section.
+Imagelytics installation package for Windows is available for download in the repository release section:<br/>
+https://github.com/a-milosavljevic/imagelytics/releases
 
 ## Processing images with Imagelytics
 1) Open the application, enter the <code>Title</code> and optionally the <code>Description</code> of the project, and select the <code>Model</code> you want to use.
