@@ -2,12 +2,12 @@
 
 ## Repository structure
 The repository consists of three folders:
-1) The <code>app</code> folder contains the source code for the Imagelytic application. It is an independent project that should have it separate virtual environment. For more details please check [app/README.md](app/README.md).
-2) The <code>train</code> folder contains scripts that can be used to train and prepare metadata for a new model that can be used with the application. It is also an independent project that should have it separate virtual environment. For more details please check [train/README.md](train/README.md).
-3) The <code>docs</code> folder contains additional files: 
-   - <code>docs/chiro10-sample-images</code> - sample images that can be used to test the application using the built-in Chiro10-EfficientNetB2 model.
-   - <code>docs/chiro10-sample-report.html</code> - sample report created with the application and appropriate Chiro10 sample images.
-   - <code>docs/images</code> - images of the UI for this document.
+1) The <code>[app](app)</code> folder contains the source code for the Imagelytic application. It is an independent project that should have it separate virtual environment. For more details please check <code>[app/README.md](app/README.md)</code>.
+2) The <code>[train](train)</code> folder contains scripts that can be used to train and prepare metadata for a new model that can be used with the application. It is also an independent project that should have it separate virtual environment. For more details please check <code>[train/README.md](train/README.md)</code>.
+3) The <code>[docs](docs)</code> folder contains additional files: 
+   - <code>[docs/chiro10-sample-images](docs/chiro10-sample-images)</code> - sample images that can be used to test the application using the built-in Chiro10-EfficientNetB2 model.
+   - <code>[docs/chiro10-sample-report.html](docs/chiro10-sample-report.html)</code> - sample report created with the application and appropriate Chiro10 sample images.
+   - <code>[docs/images](docs/images)</code> - images of the UI for this document.
 
 ## Download and install Imagelytics
 Imagelytics installation package for Windows is available for download in the repository release section.
