@@ -26,3 +26,6 @@ https://github.com/a-milosavljevic/imagelytics/releases
 6) Once the process finishes you may open the report by clicking the <code>Open report</code> button. The <code>Edit project</code> button will bring back the edit mode.
 ![imagelytics5.png](docs/images/imagelytics5.png)
 ![imagelytics6.png](docs/images/imagelytics6.png)
+
+## Acknowledgement
+This research was supported by the [Science Fund of the Republic of Serbia](http://fondzanauku.gov.rs/?lang=en), #7751676, Application of deep learning in bioassessment of aquatic ecosystems: toward the construction of automatic identifier of aquatic macroinvertebrates - [AIAQUAMI](https://twitter.com/AIAQUAMI).
