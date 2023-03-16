@@ -10,8 +10,8 @@ The repository consists of three folders:
 Imagelytics installation package for Windows is available for download in the repository release section.
 
 ## Processing images with Imagelytics
-![imagelytics1.png](docs/images/imagelytics1.png)
 1) Open the application, enter the <code>Title</code> and optionally the <code>Description</code> of the project, and select the <code>Model</code> you want to use.
+![imagelytics1.png](docs/images/imagelytics1.png)
 ![imagelytics2.png](docs/images/imagelytics2.png)
 2) Add images by dragging and dropping them into the central area labeled as <code>Images</code>. Alternatively, you may add them using the <code>Add</code> button. 
 ![imagelytics3.png](docs/images/imagelytics3.png)
