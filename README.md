@@ -27,5 +27,8 @@ https://github.com/a-milosavljevic/imagelytics/releases
 ![imagelytics5.png](docs/images/imagelytics5.png)
 ![imagelytics6.png](docs/images/imagelytics6.png)
 
+## Paper
+Milosavljević, A., Predić, B., Milošević, D. (2023). Imagelytics: A Deep Learning-Based Image Classification Tool to Support Bioassessment. In: Jove, E., Zayas-Gato, F., Michelena, Á., Calvo-Rolle, J.L. (eds) Distributed Computing and Artificial Intelligence, Special Sessions II - Intelligent Systems Applications, 20th International Conference. DCAI 2023. Lecture Notes in Networks and Systems, vol 742. Springer, Cham. https://doi.org/10.1007/978-3-031-38616-9_5
+
 ## Acknowledgement
 This research was supported by the [Science Fund of the Republic of Serbia](http://fondzanauku.gov.rs/?lang=en), #7751676, Application of deep learning in bioassessment of aquatic ecosystems: toward the construction of automatic identifier of aquatic macroinvertebrates - [AIAQUAMI](https://twitter.com/AIAQUAMI).
