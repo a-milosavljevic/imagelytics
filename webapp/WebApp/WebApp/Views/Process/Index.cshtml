@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "My Projects";
+}
+
+<h2>My Projects <a class="btn btn-primary pull-right" href="@Url.Content("~/Process/Project")"><i class='fa fa-plus'></i> New Project</a></h2>
+@if (ViewBag.Projects.Count > 0)
+{
+    <div class="table-responsive">
+        <table id="tableProjects" class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>State</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var project in ViewBag.Projects)
+                {
+                    <tr class="project-row" data-projectid="@project.Id">
+                        <td align="center"><span class="label label-@(project.State == 1 ? "primary" : (project.State == 2 ? "warning" : (project.State == 3 ? "success" : "default")))">@(project.State == 1 ? "Draft" : (project.State == 2 ? "Processing" : (project.State == 3 ? "Completed" : "New")))</span></td>
+                        <td>@((project.Title ?? "").Length < 30 ? project.Title : (project.Title ?? "").Substring(0, 30) + "...")</td>
+                        <td>@((project.Description ?? "").Length < 100 ? project.Description : (project.Description ?? "").Substring(0, 100) + "...")</td>
+                        <td>@project.DateCreated</td>
+                        <td>@project.DateModified</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+
+        var $this = this;
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // jQuery
+
+        $(document).ready(function () {
+
+            $(".project-row").click(function () {
+                console.log($(this).data("projectid"));
+                window.location.href = '@Url.Content("~/Process/Project")?projectId=' + $(this).data("projectid");
+            });
+
+        });
+
+    </script>
+}

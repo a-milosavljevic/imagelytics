@@ -1,0 +1,378 @@
+﻿@{
+    ViewBag.Title = (ViewBag.Project.State <= 1 ? "Setup project" : (ViewBag.Project.State == 2 ? "Processing project" : "Project results"));
+}
+
+<style>
+    .dropzone {
+        padding: 10px;
+        border-radius: 4px;
+    }
+
+        .dropzone .dz-preview {
+            width: 160px;
+            margin: 10px;
+        }
+
+            .dropzone .dz-preview .dz-image {
+                width: 160px;
+                height: 160px;
+                border-radius: 4px;
+            }
+
+    .progress-probability {
+        margin-bottom: 10px;
+    }
+</style>
+
+<h2>@ViewBag.Title <a class="btn btn-default pull-right" href="@Url.Content("~/Process")"><i class='fa fa-times'></i> Close</a></h2>
+
+<div class="row">
+    <div class="form-horizontal col-sm-12">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="projectTitle">Title:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="projectTitle" value="@ViewBag.Project.Title" @(ViewBag.Project.State > 1 ? "readonly" : "") />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="projectDescription">Description:</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="projectDescription" @(ViewBag.Project.State > 1 ? "readonly" : "")>@ViewBag.Project.Description</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="projectModel">Model:</label>
+            <div class="col-sm-10">
+                <select class="form-control" name="projectModel" id="projectModel" @(ViewBag.Project.State > 1 ? "readonly" : "")>
+                    @foreach (var item in ViewBag.Models)
+                    {
+                        <option value="@item.Id" @(item.Id == ViewBag.Project.ModelId ? "selected" : (ViewBag.Project.State > 1 ? "disabled" : ""))>@item.Title</option>
+
+                    }
+                </select>
+            </div>
+        </div>
+
+        @if (ViewBag.Project.State != 2) // Processing
+        {
+            <div class="form-group">
+                <div class="col-xs-6 col-sm-offset-2 col-sm-5">
+                    @if (ViewBag.Project.State <= 1)
+                    {
+                        <button id="projectProcess" type="button" class="btn btn-primary btn-block"><i class='fa fa-gear'></i> Process</button>
+                    }
+                    else
+                    {
+                        <button id="projectEdit" type="button" class="btn btn-primary btn-block"><i class='fa fa-pencil'></i> Edit</button>
+                    }
+                </div>
+                <div class="col-xs-6 col-sm-5">
+                    <button id="projectDelete" type="button" class="btn btn-danger btn-block"><i class='fa fa-trash'></i> Delete</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@if (ViewBag.Project.State <= 1) // Setup project
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <form action="FileUpload" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneProjectImage">
+                <input type="hidden" name="projectId" value="@ViewBag.Project.Id" />
+                <div class="fallback">
+                    <input name="file" type="file" multiple />
+                    <input type="submit" value="Upload" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+else if (ViewBag.Project.State == 2) // Project is processing
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="text-center">Please wait while project processing finishes...</div>
+            <div class="progress">
+                <div id="projectProgressBar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="@ViewBag.PercentComplete" aria-valuemin="0" aria-valuemax="100" style="width:@(ViewBag.PercentComplete)%">@(ViewBag.PercentComplete)% Complete</div>
+            </div>
+        </div>
+    </div>
+}
+else if (ViewBag.Project.State == 3) // View processed project
+{
+    foreach (var image in ViewBag.ProjectImages)
+    {
+        <hr />
+        <div class="row">
+            <div class="col-sm-6" data-imageid="@image.Id" style="padding-bottom:15px">
+                <img style="margin:auto" class="img-responsive img-rounded" alt="@image.Name" src="@Url.Content(string.Format("~/img/{0}/{1}_HM.jpg", image.ProjectId, image.Name))" />
+            </div>
+            <div class="col-sm-6">
+                <div class="alert alert-info"><strong>@image.Name</strong></div>
+                <div class="well">
+                    <div>@image.ClassName1 <span class="pull-right">@(image.ClassProbability1)%</span></div>
+                    <div class="progress progress-probability">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="@image.ClassProbability1" aria-valuemin="0" aria-valuemax="100" style="width:@(@image.ClassProbability1)%"></div>
+                    </div>
+                    <div>@image.ClassName2 <span class="pull-right">@(image.ClassProbability2)%</span></div>
+                    <div class="progress progress-probability">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="@image.ClassProbability2" aria-valuemin="0" aria-valuemax="100" style="width:@(@image.ClassProbability2)%"></div>
+                    </div>
+                    <div>@image.ClassName3 <span class="pull-right">@(image.ClassProbability3)%</span></div>
+                    <div class="progress progress-probability">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="@image.ClassProbability3" aria-valuemin="0" aria-valuemax="100" style="width:@(@image.ClassProbability3)%"></div>
+                    </div>
+                    <div>@image.ClassName4 <span class="pull-right">@(image.ClassProbability4)%</span></div>
+                    <div class="progress progress-probability">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="@image.ClassProbability4" aria-valuemin="0" aria-valuemax="100" style="width:@(@image.ClassProbability4)%"></div>
+                    </div>
+                    <div>@image.ClassName5 <span class="pull-right">@(image.ClassProbability5)%</span></div>
+                    <div class="progress progress-probability">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="@image.ClassProbability5" aria-valuemin="0" aria-valuemax="100" style="width:@(@image.ClassProbability5)%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <hr />
+    <div class="row">
+        <div class="alert alert-info text-center"><h2>Class statistics</h2></div>
+        <div class="well">
+            @foreach (var item in ViewBag.ClassStatistics)
+            {
+                <div>@item.ClassName <span class="pull-right">@item.ImageCount (@item.Percentage%)</span></div><div class="progress progress-probability">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="@item.Percentage" aria-valuemin="0" aria-valuemax="100" style="width:@item.Percentage%"></div>
+                </div>
+            }            
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+
+    var $this = this;
+
+    @if (ViewBag.Project.State <= 1) // Setup project
+    {
+        <text>
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Dropzone
+
+        $this.projectImage = [];
+        @foreach (var item in ViewBag.ProjectImages)
+        {
+            var dataURL = Url.Content(string.Format("~/img/{0}/{1}.jpg", ViewBag.Project.Id, item.Name));
+            @:projectImage.push({ name: "@item.Name", size: @item.Size, type: "image/jpeg", dataUrl: "@dataURL" });
+        }
+
+        Dropzone.options.dropzoneProjectImage = {
+            createImageThumbnails: false,
+            thumbnailWidth: 160,
+            thumbnailHeight: 160,
+            clickable: true,
+            acceptedFiles: ".jpg,.png,.jpeg,.tif,.tiff",
+            maxFilesize: 20, // MB
+            addRemoveLinks: true,
+            init: function () {
+                var dzThis = this;
+
+                this.on("complete", function(file) {
+                    if (file.accepted == true && file.status == "success") {
+                        var name = imagelytics.nameWithoutExtension(file.name);
+                        file.dataURL = "@Url.Content(string.Format("~/img/{0}/", ViewBag.Project.Id))" + name + ".jpg";
+                        dzThis.createThumbnailFromUrl(file,
+                            dzThis.options.thumbnailWidth, dzThis.options.thumbnailHeight,
+                            dzThis.options.thumbnailMethod, true, function (thumbnail) {
+                                dzThis.emit("thumbnail", file, thumbnail);
+                            }
+                        );
+                    }
+                });
+
+                this.on("error", function (file, errorMessage, xhr) {
+                    $(file.previewElement).find(".dz-error-message").text(errorMessage.Message);
+                });
+
+                this.on("removedfile", function (file) {
+                    if(file.accepted == true && file.status == "success") {
+                        imagelytics.postJSON("DeleteImage", { projectId: @ViewBag.Project.Id, filename: file.name }, function (response) {
+                            if (response.valid == false) {
+                                imagelytics.error(response.message);
+                            }
+                        });
+                    }
+                });
+
+                this.on("success", function (file) {
+                    setTimeout(function () {
+                        file.previewElement.classList.remove("dz-success");
+                    }, 3000);
+                });
+
+                for (var i in $this.projectImage) {
+                    var file = { name: $this.projectImage[i].name + ".jpg", size: $this.projectImage[i].size, type: $this.projectImage[i].type, accepted: true, processing: false, status: "success", dataURL: $this.projectImage[i].dataURL };
+                    dzThis.files.push(file);
+                    dzThis.emit("addedfile", file);
+                    dzThis.emit("complete", file);
+                }
+            }
+        };
+        </text>
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // jQuery
+
+    $(document).ready(function () {
+
+        @if (ViewBag.Project.State <= 1) // Setup Project
+        {
+            <text>
+            // Dropzone (disable submit on enter)
+            $('#dropzoneProjectImage').on("keyup keypress", function (e) {
+                var keyCode = e.keyCode || e.which;
+                if (keyCode === 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+            </text>
+        }
+
+        @if (ViewBag.Project.State == 2) // Processing Project
+        {
+            <text>
+            // Refresh complete percentage
+            window.setInterval(function () {
+                imagelytics.postJSON("GetProjectCompletePrecentage", { projectId: @ViewBag.Project.Id }, function (response) {
+                    if (response.valid == false) {
+                        $("#projectProgressBar").removeClass("active");
+                    } else {
+                        $("#projectProgressBar").attr("aria-valuenow", response.percentComplete);
+                        $("#projectProgressBar").css("width", response.percentComplete + "%");
+                        $("#projectProgressBar").html(response.percentComplete + "% Complete");
+                        $("#projectProgressBar").addClass("active");
+                        if (response.state != 2) {
+                            window.location.reload();
+                        }
+                    }
+                });
+            }, 5000);
+            </text>
+        }
+
+        $("#projectTitle").change(function () {
+            imagelytics.postJSON("SetProjectTitle", { projectId: @ViewBag.Project.Id, val: $(this).val() }, function (response) {
+                if (response.valid == false) {
+                    imagelytics.error(response.message);
+                }
+            });
+        });
+
+        $("#projectDescription").change(function () {
+            imagelytics.postJSON("SetProjectDescription", { projectId: @ViewBag.Project.Id, val: $(this).val() }, function (response) {
+                if (response.valid == false) {
+                    imagelytics.error(response.message);
+                }
+            });
+        });
+
+        $("#projectModel").change(function () {
+            imagelytics.postJSON("SetProjectModel", { projectId: @ViewBag.Project.Id, val: $(this).val() }, function (response) {
+                if (response.valid == false) {
+                    imagelytics.error(response.message);
+                }
+            });
+        });
+
+        $("#projectProcess").click(function () {
+            bootbox.confirm({
+                message: "Are you sure you want to initiate processing of the project?",
+                buttons: {
+                    confirm: {
+                        label: 'OK',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'Cancel',
+                        className: 'btn-default'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        imagelytics.postJSON("ProcessProject", { projectId: @ViewBag.Project.Id }, function (response) {
+                            if (response.valid == false) {
+                                imagelytics.error(response.message);
+                            } else {
+                                if (window.location.href.indexOf('?projectId=') > 0) {
+									window.location.reload();
+                                } else {
+                                    window.location.href = '@Url.Content("~/Process/Project")' + '?projectId=' + @ViewBag.Project.Id;
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        $("#projectEdit").click(function () {
+            bootbox.confirm({
+                message: "Are you sure you want to edit the project?",
+                buttons: {
+                    confirm: {
+                        label: 'OK',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'Cancel',
+                        className: 'btn-default'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        imagelytics.postJSON("EditProject", { projectId: @ViewBag.Project.Id }, function (response) {
+                            if (response.valid == false) {
+                                imagelytics.error(response.message);
+                            } else {
+                                window.location.reload();
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        $("#projectDelete").click(function () {
+            bootbox.confirm({
+                message: "Are you sure you want to delete the project?",
+                buttons: {
+                    confirm: {
+                        label: 'OK',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: 'Cancel',
+                        className: 'btn-default'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        imagelytics.postJSON("DeleteProject", { projectId: @ViewBag.Project.Id }, function (response) {
+                            if (response.valid == false) {
+                                imagelytics.error(response.message);
+                            } else {
+                                window.location.href = '@Url.Content("~/Process")';
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    });
+
+    </script>
+}

@@ -1,19 +1,20 @@
-# Imagelytics: A standalone desktop application for image classification with visualization and reporting
+# Imagelytics Suite: Deep Learning-Powered Image Classification for Bioassessment in Desktop and Web Environments
 
 ## Repository structure
 The repository consists of three folders:
-1) The <code>[app](app)</code> folder contains the source code for the Imagelytic application. It is an independent project that should have it separate virtual environment. For more details please check <code>[app/README.md](app/README.md)</code>.
-2) The <code>[train](train)</code> folder contains scripts that can be used to train and prepare metadata for a new model that can be used with the application. It is also an independent project that should have it separate virtual environment. For more details please check <code>[train/README.md](train/README.md)</code>.
+1) The <code>[app](app)</code> folder contains the source code for the Imagelytic desktop application. It is an independent project that should have it separate virtual environment. For more details please check <code>[app/README.md](app/README.md)</code>.
+2) The <code>[webapp](app)</code> folder contains the source code for the Imagelytic web application. For more details please check <code>[webapp/README.md](webapp/README.md)</code>.
+2) The <code>[train](train)</code> folder contains scripts that can be used to train and prepare metadata for a new model that can be used with both desktop and web applications. It is also an independent project that should have it separate virtual environment. For more details please check <code>[train/README.md](train/README.md)</code>.
 3) The <code>[docs](docs)</code> folder contains additional files: 
-   - <code>[docs/chiro10-sample-images](docs/chiro10-sample-images)</code> - sample images that can be used to test the application using the built-in Chiro10-EfficientNetB2 model.
-   - <code>[docs/chiro10-sample-report.html](docs/chiro10-sample-report.html)</code> - sample report created with the application and appropriate Chiro10 sample images.
+   - <code>[docs/chiro10-sample-images](docs/chiro10-sample-images)</code> - sample images that can be used to test the applications using the built-in Chiro10-EfficientNetB2 model.
+   - <code>[docs/chiro10-sample-report.html](docs/chiro10-sample-report.html)</code> - sample report created with the desktop application and appropriate Chiro10 sample images.
    - <code>[docs/images](docs/images)</code> - images of the UI for this document.
 
-## Download and install Imagelytics
-Imagelytics installation package for Windows is available for download in the repository release section:<br/>
+## Download and install Imagelytics desktop application
+The Imagelytics installation package for Windows is available for download in the repository release section:<br/>
 https://github.com/a-milosavljevic/imagelytics/releases
 
-## Processing images with Imagelytics
+## Processing images with Imagelytics desktop application
 1) Open the application, enter the <code>Title</code> and optionally the <code>Description</code> of the project, and select the <code>Model</code> you want to use.
 ![imagelytics1.png](docs/images/imagelytics1.png)
 ![imagelytics2.png](docs/images/imagelytics2.png)
@@ -27,7 +28,7 @@ https://github.com/a-milosavljevic/imagelytics/releases
 ![imagelytics5.png](docs/images/imagelytics5.png)
 ![imagelytics6.png](docs/images/imagelytics6.png)
 
-## Paper
+## Paper describing Imagelytics desktop application
 Milosavljević, A., Predić, B., Milošević, D. (2023). Imagelytics: A Deep Learning-Based Image Classification Tool to Support Bioassessment. In: Jove, E., Zayas-Gato, F., Michelena, Á., Calvo-Rolle, J.L. (eds) Distributed Computing and Artificial Intelligence, Special Sessions II - Intelligent Systems Applications, 20th International Conference. DCAI 2023. Lecture Notes in Networks and Systems, vol 742. Springer, Cham. https://doi.org/10.1007/978-3-031-38616-9_5
 
 ## Acknowledgement

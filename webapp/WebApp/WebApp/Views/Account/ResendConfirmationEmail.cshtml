@@ -1,0 +1,23 @@
+﻿@model WebApp.Models.ResendConfirmationEmailViewModel
+@{
+    ViewBag.Title = "Account Activation";
+}
+
+<h2>Account is not activated</h2>
+
+@using (Html.BeginForm("ResendConfirmationEmail", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Email)
+    <h4>Please check your email to activate the account.</h4>
+    <hr />
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <p>To activate the account please click on the link that we emailed you.</p>
+    <p>In case you have not received the activation email, please request resend using the following option:</p>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" class="btn btn-default" value="Resend activation email" />
+        </div>
+    </div>
+}
