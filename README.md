@@ -3,7 +3,7 @@
 ## Repository structure
 The repository consists of three folders:
 1) The <code>[app](app)</code> folder contains the source code for the Imagelytic desktop application. It is an independent project that should have it separate virtual environment. For more details please check <code>[app/README.md](app/README.md)</code>.
-2) The <code>[webapp](app)</code> folder contains the source code for the Imagelytic web application. For more details please check <code>[webapp/README.md](webapp/README.md)</code>.
+2) The <code>[webapp](webapp)</code> folder contains the source code for the Imagelytic web application. For more details please check <code>[webapp/README.md](webapp/README.md)</code>.
 2) The <code>[train](train)</code> folder contains scripts that can be used to train and prepare metadata for a new model that can be used with both desktop and web applications. It is also an independent project that should have it separate virtual environment. For more details please check <code>[train/README.md](train/README.md)</code>.
 3) The <code>[docs](docs)</code> folder contains additional files: 
    - <code>[docs/chiro10-sample-images](docs/chiro10-sample-images)</code> - sample images that can be used to test the applications using the built-in Chiro10-EfficientNetB2 model.
