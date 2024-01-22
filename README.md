@@ -6,8 +6,8 @@ The Imagelytics Suite consists of the desktop and web applications, so as the tr
 The repository consists of four folders:
 1) The <code>[app](app)</code> folder contains the source code for the Imagelytic desktop application. It is an independent project that should have a separate virtual environment. For more details please check <code>[app/README.md](app/README.md)</code>.
 2) The <code>[webapp](webapp)</code> folder contains the source code for the Imagelytic web application. For more details please check <code>[webapp/README.md](webapp/README.md)</code>.
-2) The <code>[train](train)</code> folder contains scripts that can be used to train and prepare metadata for a new model that can be used with both desktop and web applications. It is also an independent project that should have a separate virtual environment. For more details please check <code>[train/README.md](train/README.md)</code>.
-3) The <code>[docs](docs)</code> folder contains additional files: 
+3) The <code>[train](train)</code> folder contains scripts that can be used to train and prepare metadata for a new model that can be used with both desktop and web applications. It is also an independent project that should have a separate virtual environment. For more details please check <code>[train/README.md](train/README.md)</code>.
+4) The <code>[docs](docs)</code> folder contains additional files: 
    - <code>[docs/chiro10-sample-images](docs/chiro10-sample-images)</code> - sample images that can be used to test the applications using the built-in Chiro10-EfficientNetB2 model.
    - <code>[docs/chiro10-sample-report.html](docs/chiro10-sample-report.html)</code> - sample report created with the desktop application and appropriate Chiro10 sample images.
    - <code>[docs/images](docs/images)</code> - images of the UI for this document.
