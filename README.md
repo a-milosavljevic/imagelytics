@@ -1,5 +1,7 @@
 # Imagelytics Suite: Deep Learning-Powered Image Classification for Bioassessment in Desktop and Web Environments
 
+The Imagelytics Suite consists of the desktop and web applications, so as the training scripts used to produce models for these applications.
+
 ## Repository structure
 The repository consists of three folders:
 1) The <code>[app](app)</code> folder contains the source code for the Imagelytic desktop application. It is an independent project that should have a separate virtual environment. For more details please check <code>[app/README.md](app/README.md)</code>.
