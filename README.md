@@ -33,5 +33,8 @@ https://github.com/a-milosavljevic/imagelytics/releases
 ## Paper describing Imagelytics desktop application
 Milosavljević, A., Predić, B., Milošević, D. (2023). Imagelytics: A Deep Learning-Based Image Classification Tool to Support Bioassessment. In: Jove, E., Zayas-Gato, F., Michelena, Á., Calvo-Rolle, J.L. (eds) Distributed Computing and Artificial Intelligence, Special Sessions II - Intelligent Systems Applications, 20th International Conference. DCAI 2023. Lecture Notes in Networks and Systems, vol 742. Springer, Cham. https://doi.org/10.1007/978-3-031-38616-9_5
 
+## Paper describing Imagelytics Suite that includes both web and desktop applications
+Milosavljević, A., Predić, B., Milošević, D. (2024). Imagelytics suite: deep learning-powered image classification for bioassessment in desktop and web environments. Logic Journal of the IGPL, September 2024, pn. jzae103, ISSN: 1368-9894. https://doi.org/10.1093/jigpal/jzae103
+
 ## Acknowledgement
 This research was supported by the [Science Fund of the Republic of Serbia](http://fondzanauku.gov.rs/?lang=en), #7751676, Application of deep learning in bioassessment of aquatic ecosystems: toward the construction of automatic identifier of aquatic macroinvertebrates - [AIAQUAMI](https://twitter.com/AIAQUAMI).
