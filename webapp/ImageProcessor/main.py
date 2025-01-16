@@ -9,19 +9,22 @@ from db import *
 tf.compat.v1.disable_eager_execution()
 
 
-def square_resize_image(img_input):
-    img_out = img_input
-    w, h = img_out.shape[1], img_out.shape[0]
-    top, bottom, left, right = 0, 0, 0, 0
-    if w >= h:
-        top = (w - h) // 2
-        bottom = (w - h) - top
+def square_resize_image(img_input, image_size, stretch):
+    if stretch:
+        img_out = cv.resize(img_input, (image_size, image_size), interpolation=cv.INTER_AREA)
     else:
-        left = (h - w) // 2
-        right = (h - w) - left
-    #mean_color = tuple(np.average(img_input, axis=(0, 1)))
-    img_out = cv.copyMakeBorder(img_out, top, bottom, left, right, cv.BORDER_CONSTANT, value=(0, 0, 0)) #mean_color
-    img_out = cv.resize(img_out, (image_size, image_size), interpolation=cv.INTER_AREA)
+        img_out = img_input
+        w, h = img_out.shape[1], img_out.shape[0]
+        top, bottom, left, right = 0, 0, 0, 0
+        if w >= h:
+            top = (w - h) // 2
+            bottom = (w - h) - top
+        else:
+            left = (h - w) // 2
+            right = (h - w) - left
+        #mean_color = tuple(np.average(img_input, axis=(0, 1)))
+        img_out = cv.copyMakeBorder(img_out, top, bottom, left, right, cv.BORDER_CONSTANT, value=(0, 0, 0)) #mean_color
+        img_out = cv.resize(img_out, (image_size, image_size), interpolation=cv.INTER_AREA)
     return img_out
 
 
@@ -35,6 +38,18 @@ def crop_original(img_input, w, h):
         left = round(d * 0.5 * (h - w) / h)
         right = d - left
         return img_input[:, left:right, :]
+    else:
+        return img_input
+        
+
+def resize_original_aspect(img_input, w, h):
+    d = img_input.shape[0]
+    if w > h:
+        dh = round(d * h / w)
+        return cv.resize(img_input, (d, dh), interpolation=cv.INTER_LINEAR)
+    elif w < h:
+        dw = round(d * w / h)
+        return cv.resize(img_input, (dw, d), interpolation=cv.INTER_LINEAR)
     else:
         return img_input
 
@@ -104,7 +119,7 @@ while True:
                 img_src = cv.imread(path)
                 if img_src is not None:
                     original_sizes.append((img_src.shape[1], img_src.shape[0]))
-                    img_square = square_resize_image(img_src)
+                    img_square = square_resize_image(img_src, image_size, stretch)
                     #path_square = '{}/{}/{}_SQ.jpg'.format(img_root, item[1], item[2])
                     #cv.imwrite(path_square, img_square)
                     img_square = cv.cvtColor(img_square, cv.COLOR_BGR2RGB)
@@ -175,7 +190,12 @@ while True:
                     heatmap = cv.applyColorMap(heatmap, cv.COLORMAP_JET)
 
                     superimposed_img = heatmap * 0.4 + img
-                    superimposed_img = crop_original(superimposed_img, w=original_sizes[i][0], h=original_sizes[i][1])
+                    if stretch:
+                        superimposed_img = resize_original_aspect(superimposed_img,
+                                                                  w=original_sizes[i][0], h=original_sizes[i][1])
+                    else:
+                        superimposed_img = crop_original(superimposed_img,
+                                                         w=original_sizes[i][0], h=original_sizes[i][1])
                     path_heatmap = '{}/{}/{}_HM.jpg'.format(img_root, item[1], item[2])
                     cv.imwrite(path_heatmap, superimposed_img)
 
